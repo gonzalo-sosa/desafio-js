@@ -7,7 +7,7 @@ const admin = crearUsuario("admin", {
   clave: "123",
 });
 
-console.log(usuarios);
+console.log({ usuarios });
 
 const editor = crearUsuario("editor", {
   nombre: "agustin",
@@ -24,4 +24,9 @@ const regular = crearUsuario("regular", {
 admin.agregarUsuario(editor);
 admin.agregarUsuario(regular);
 
-console.log(usuarios);
+console.log({ usuarios });
+
+for (let usuario of usuarios) {
+  usuario.login();
+  usuario.logout();
+}
