@@ -1,6 +1,7 @@
 // TODO: verificación de email
 // TODO: hash de clave
 import { obtenerUID, cifrarClave } from "../lib/generator.js";
+import { verificarEmail } from "../utils/validator.js";
 
 export var usuarios = [];
 
@@ -10,9 +11,11 @@ const _email = new WeakMap();
 const _sesionIniciada = new WeakMap();
 
 export function Usuario(nombre, email, clave) {
+  verificarEmail(email);
+
   _id.set(this, obtenerUID());
   _nombre.set(this, nombre);
-  _email.set(this, email);
+  _email.set(this, email.trim());
   _sesionIniciada.set(this, false);
   let _clave = cifrarClave(clave);
 }
@@ -23,6 +26,8 @@ Usuario.prototype.login = function () {
   if (sesionIniciada) throw new Error("La sesión ya está iniciada.");
 
   _sesionIniciada.set(this, !sesionIniciada);
+
+  console.log(`Bienvenido, ${_nombre.get(this)}.`);
 };
 
 Usuario.prototype.logout = function () {
@@ -31,4 +36,6 @@ Usuario.prototype.logout = function () {
   if (!sesionIniciada) throw new Error("La sesión ya está cerrada.");
 
   _sesionIniciada.set(this, !sesionIniciada);
+
+  console.log(`Hasta la proxima ${_nombre.get(this)}.`);
 };
