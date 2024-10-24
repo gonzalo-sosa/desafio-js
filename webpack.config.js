@@ -3,14 +3,24 @@ const path = require("path");
 
 module.exports = {
   mode: "development",
-  watch: true,
-  watchOptions: {
-    ignored: /node_modules/,
-  },
   entry: "./src/index.js",
   output: {
     path: path.resolve(__dirname, "dist"),
     filename: "main.js",
+    clean: true,
+  },
+  watch: true,
+  watchOptions: {
+    ignored: /node_modules/,
+  },
+  devtool: "inline-source-map",
+  devServer: {
+    static: {
+      directory: path.join(__dirname, "dist"),
+    },
+    compress: true,
+    port: 3000,
+    open: true,
   },
   module: {
     rules: [
