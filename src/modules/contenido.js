@@ -3,9 +3,9 @@ import { esString } from "../utils/validator.js";
 
 export class Contenido {
   constructor(titulo, texto) {
-    let id = obtenerUID();
-    let titulo = titulo;
-    let texto = texto;
+    let _id = obtenerUID();
+    this.titulo = titulo;
+    this.texto = texto;
   }
 
   set titulo(nuevoTitulo) {
@@ -27,4 +27,8 @@ export class Contenido {
   get texto() {
     return this.texto;
   }
+}
+
+export function esInstanciaDeContenido(obj) {
+  return obj instanceof Contenido;
 }
