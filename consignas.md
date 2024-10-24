@@ -70,7 +70,6 @@ Desarrollar un sistema de gestión de usuarios y roles con características avan
 
 ## Ejemplo de Estructura de Archivos:
 ```bash
-Copiar código
 /src
   /modules
     usuario.js
