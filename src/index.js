@@ -23,6 +23,7 @@ const regular = crearUsuario("regular", {
 
 admin.agregarUsuario(editor);
 admin.agregarUsuario(regular);
+admin.eliminarUsuario(regular);
 
 console.log({ usuarios });
 
