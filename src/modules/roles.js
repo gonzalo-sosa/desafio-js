@@ -1,23 +1,28 @@
-import { usuarios, Usuario } from "./usuario.js";
+import { usuarios, Usuario, esInstanciaDeUsuario } from "./usuario.js";
 import { extend } from "../lib/extend.js";
 import { esObjeto } from "../utils/validator.js";
+import { esInstanciaDeContenido } from "./contenido.js";
 
 export function Administrador(nombre, email, clave) {
   Usuario.call(this, nombre, email, clave);
   usuarios.push(this);
 
   this.agregarUsuario = function (usuario) {
-    // TODO: verificar que es usuario válido
     if (!esObjeto(usuario)) throw new Error("No es objeto.");
+    if (!esInstanciaDeUsuario(usuario)) throw new Error("No es usuario.");
 
     usuarios.push(usuario);
   };
 
   this.eliminarUsuario = function (usuario) {
-    // TODO: verificar que es usuario válido
     if (!esObjeto(usuario)) throw new Error("No es objeto.");
+    if (!esInstanciaDeUsuario(usuario)) throw new Error("No es usuario.");
 
-    usuarios.splice(usuarios.findIndex(usuario), 1);
+    const indice = usuarios.findIndex((u) => {
+      u.id === usuario.id;
+    });
+
+    usuarios.splice(indice, 1);
   };
 }
 
@@ -38,8 +43,8 @@ export function UsuarioRegular(nombre, email, clave) {
   Usuario.call(this, nombre, email, clave);
 
   this.verContenido = function (contenido) {
-    // TODO: verificar que es contenido válido
-    if (esObjeto(contenido)) throw new Error("No es objeto.");
+    if (!esObjeto(contenido)) throw new Error("No es objeto.");
+    if (!esInstanciaDeContenido(contenido)) throw new Error("No es contenido.");
 
     console.log(`${this.nombre} viendo "${contenido.titulo}"`);
   };
