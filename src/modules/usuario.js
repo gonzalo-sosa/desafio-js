@@ -3,7 +3,7 @@
 import { obtenerUID, cifrarClave } from "../lib/generator.js";
 import { verificarEmail } from "../utils/validator.js";
 
-export var usuarios = [];
+export var usuarios = []; // Variable global
 
 const _id = new WeakMap();
 const _nombre = new WeakMap();
@@ -18,6 +18,12 @@ export function Usuario(nombre, email, clave) {
   _email.set(this, email.trim());
   _sesionIniciada.set(this, false);
   let _clave = cifrarClave(clave);
+
+  Object.defineProperty(this, "_id", {
+    get: function () {
+      return _id.get(this);
+    },
+  });
 }
 
 Usuario.prototype.login = function () {
@@ -39,3 +45,7 @@ Usuario.prototype.logout = function () {
 
   console.log(`Hasta la proxima ${_nombre.get(this)}.`);
 };
+
+export function esInstanciaDeUsuario(obj) {
+  return obj instanceof Usuario;
+}
