@@ -1,19 +1,21 @@
 import { usuarios, Usuario } from "./usuario.js";
 import { extend } from "../lib/extend.js";
+import { esObjeto } from "../utils/validator.js";
 
 export function Administrador(nombre, email, clave) {
   Usuario.call(this, nombre, email, clave);
+  usuarios.push(this);
 
   this.agregarUsuario = function (usuario) {
     // TODO: verificar que es usuario válido
-    if (typeof usuario !== "object") throw new Error("No es objeto.");
+    if (!esObjeto(usuario)) throw new Error("No es objeto.");
 
     usuarios.push(usuario);
   };
 
   this.eliminarUsuario = function (usuario) {
     // TODO: verificar que es usuario válido
-    if (typeof usuario !== "object") throw new Error("No es objeto.");
+    if (!esObjeto(usuario)) throw new Error("No es objeto.");
 
     usuarios.splice(usuarios.findIndex(usuario), 1);
   };
@@ -37,7 +39,7 @@ export function UsuarioRegular(nombre, email, clave) {
 
   this.verContenido = function (contenido) {
     // TODO: verificar que es contenido válido
-    if (typeof contenido !== "object") throw new Error("No es objeto.");
+    if (esObjeto(contenido)) throw new Error("No es objeto.");
 
     console.log(`${this.nombre} viendo "${contenido.titulo}"`);
   };
