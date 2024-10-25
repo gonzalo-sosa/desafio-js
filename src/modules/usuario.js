@@ -19,13 +19,13 @@ export function Usuario(nombre, email, clave) {
   _sesionIniciada.set(this, false);
   let _clave = cifrarClave(clave);
 
-  Object.defineProperty(this, "_id", {
+  Object.defineProperty(this, "id", {
     get: function () {
       return _id.get(this);
     },
   });
 
-  Object.defineProperty(this, "_nombre", {
+  Object.defineProperty(this, "nombre", {
     get: function () {
       return _nombre.get(this);
     },
