@@ -2,9 +2,12 @@ import { Administrador, Editor, UsuarioRegular, ROLES } from "../modules/roles";
 import { esString } from "../utils/validator";
 
 /**
- @param tipo string - Tipo de usuario a crear. Ver ROLES en roles.js
- @param usuario - nombre, email y clave.
- **/
+ * Crea un usuario de tipo Administrador, Editor o UsuarioRegular.
+ * @param {string} tipo - Tipo de usuario a crear. Ver ROLES en roles.js
+ * @param {{nombre: string, email: string, clave: string}} usuario - nombre, email y clave.
+ * @returns {Administrador|Editor|UsuarioRegular|null} - El nuevo usuario o null si no
+ * se pudo crear.
+ */
 export const crearUsuario = (tipo, { nombre, email, clave }) => {
   if (!esString(tipo)) throw new Error("Tipo no es string.");
 
