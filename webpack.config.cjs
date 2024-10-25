@@ -1,8 +1,8 @@
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const path = require("path");
+const webpack = require("webpack");
 
 module.exports = {
-  mode: "development",
   entry: "./src/index.js",
   output: {
     path: path.resolve(__dirname, "dist"),
@@ -35,10 +35,23 @@ module.exports = {
       },
     ],
   },
+  resolve: {
+    fallback: {
+      vm: false,
+      crypto: require.resolve("crypto-browserify"),
+      stream: require.resolve("stream-browserify"),
+    },
+  },
   plugins: [
     new HtmlWebpackPlugin({
       template: "./src/index.html",
       filename: "index.html",
+    }),
+    new webpack.ProvidePlugin({
+      process: "process/browser",
+    }),
+    new webpack.NormalModuleReplacementPlugin(/node:crypto/, (resource) => {
+      resource.request = resource.request.replace(/^node:/, "");
     }),
   ],
 };
