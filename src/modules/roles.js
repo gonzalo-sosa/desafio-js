@@ -5,7 +5,6 @@ import { esInstanciaDeContenido } from "./contenido.js";
 
 export function Administrador(nombre, email, clave) {
   Usuario.call(this, nombre, email, clave);
-  usuarios.push(this);
 
   this.agregarUsuario = function (usuario) {
     if (!esObjeto(usuario)) throw new Error("No es objeto.");
@@ -24,6 +23,8 @@ export function Administrador(nombre, email, clave) {
 
     usuarios.splice(indice, 1);
   };
+
+  usuarios.push(this);
 }
 
 export function Editor(nombre, email, clave) {
