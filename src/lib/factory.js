@@ -7,15 +7,19 @@ import { esString } from "../utils/validator";
  **/
 export const crearUsuario = (tipo, { nombre, email, clave }) => {
   if (!esString(tipo)) throw new Error("Tipo no es string.");
+
   if (tipo.toUpperCase() === ROLES.ADMIN)
     return new Administrador(nombre, email, clave);
+
   if (tipo.toUpperCase() === ROLES.EDITOR)
     return new Editor(nombre, email, clave);
+
   if (tipo.toUpperCase() === ROLES.REGULAR)
     return new UsuarioRegular(nombre, email, clave);
+
   return null;
 };
 
-export const crearContenido = () => {
-  return new Contenido();
+export const crearContenido = ({ titulo, texto }) => {
+  return new Contenido(titulo, texto);
 };
