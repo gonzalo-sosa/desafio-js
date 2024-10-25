@@ -9,7 +9,6 @@ module.exports = {
     filename: "main.js",
     clean: true,
   },
-  watch: true,
   watchOptions: {
     ignored: /node_modules/,
   },
