@@ -17,9 +17,9 @@ export function Administrador(nombre, email, clave) {
     if (!esObjeto(usuario)) throw new Error("No es objeto.");
     if (!esInstanciaDeUsuario(usuario)) throw new Error("No es usuario.");
 
-    const indice = usuarios.findIndex((u) => {
-      u.id === usuario.id;
-    });
+    const indice = usuarios.findIndex((u) => 
+      u.id === usuario.id
+    );
 
     usuarios.splice(indice, 1);
   };
