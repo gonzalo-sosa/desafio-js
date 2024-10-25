@@ -1,8 +1,13 @@
-export function obtenerUID(n = 100) {
-  return Date.now() * Math.floor(Math.random() * n);
+export async function obtenerUUID(n = 100) {
+  const { randomUUID } = await import("crypto");
+
+  return randomUUID();
 }
 
-// TODO: cifrar clave con semilla
-export function cifrarClave(semilla) {
-  return semilla;
+export async function cifrarClave(clave, semilla) {
+  const { createHash } = await import("crypto");
+
+  return createHash("sha256")
+    .update(clave + semilla)
+    .digest("hex");
 }
