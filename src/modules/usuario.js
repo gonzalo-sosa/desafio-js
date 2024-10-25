@@ -14,7 +14,7 @@ export function Usuario(nombre, email, clave) {
   verificarEmail(email);
 
   _id.set(this, obtenerUID());
-  _nombre.set(this, nombre);
+  _nombre.set(this, nombre.trim());
   _email.set(this, email.trim());
   _sesionIniciada.set(this, false);
   let _clave = cifrarClave(clave);
@@ -22,6 +22,12 @@ export function Usuario(nombre, email, clave) {
   Object.defineProperty(this, "_id", {
     get: function () {
       return _id.get(this);
+    },
+  });
+
+  Object.defineProperty(this, "_nombre", {
+    get: function () {
+      return _nombre.get(this);
     },
   });
 }
@@ -33,7 +39,7 @@ Usuario.prototype.login = function () {
 
   _sesionIniciada.set(this, !sesionIniciada);
 
-  console.log(`Bienvenido, ${_nombre.get(this)}.`);
+  console.log(`Bienvenido, ${this.nombre}.`);
 };
 
 Usuario.prototype.logout = function () {
@@ -43,7 +49,7 @@ Usuario.prototype.logout = function () {
 
   _sesionIniciada.set(this, !sesionIniciada);
 
-  console.log(`Hasta la proxima ${_nombre.get(this)}.`);
+  console.log(`Hasta la proxima ${this.nombre}.`);
 };
 
 export function esInstanciaDeUsuario(obj) {
