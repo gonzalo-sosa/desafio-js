@@ -1,9 +1,9 @@
-import { obtenerUID } from "../lib/generator.js";
+import { obtenerUUID } from "../lib/generator.js";
 import { esString } from "../utils/validator.js";
 
 export class Contenido {
   constructor(titulo, texto) {
-    let _id = obtenerUID();
+    let _id = obtenerUUID();
     this.titulo = titulo;
     this.texto = texto;
   }
