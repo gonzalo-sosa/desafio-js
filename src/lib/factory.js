@@ -1,5 +1,10 @@
-import { Administrador, Editor, UsuarioRegular, ROLES } from "../modules/roles";
-import { esString } from "../utils/validator";
+import {
+  Administrador,
+  Editor,
+  UsuarioRegular,
+  ROLES,
+} from "../modules/roles.js";
+import { esString } from "../utils/validator.js";
 
 /**
  * Crea un usuario de tipo Administrador, Editor o UsuarioRegular.
