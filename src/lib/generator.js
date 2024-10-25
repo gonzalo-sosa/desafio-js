@@ -1,4 +1,4 @@
-export async function obtenerUUID(n = 100) {
+export async function obtenerUUID() {
   const { randomUUID } = await import("crypto");
 
   return randomUUID();
