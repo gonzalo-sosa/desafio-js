@@ -31,12 +31,11 @@ export function Editor(nombre, email, clave) {
   Usuario.call(this, nombre, email, clave);
 
   this.editarContenido = function (contenido, { titulo, texto }) {
-    if (typeof titulo !== "string") throw new Error("Titulo no es string.");
-    if (typeof texto !== "string") throw new Error("Texto no es string.");
     if (typeof contenido !== "object") throw new Error("No es objeto.");
+    if (!esInstanciaDeContenido(contenido)) throw new Error("No es contenido.");
 
-    contenido.editarTitulo(titulo);
-    contenido.editarTexto(texto);
+    contenido.titulo = titulo;
+    contenido.texto = texto;
   };
 }
 
