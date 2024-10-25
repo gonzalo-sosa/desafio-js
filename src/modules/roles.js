@@ -7,21 +7,29 @@ export function Administrador(nombre, email, clave) {
   Usuario.call(this, nombre, email, clave);
 
   this.agregarUsuario = function (usuario) {
-    if (!esObjeto(usuario)) throw new Error("No es objeto.");
-    if (!esInstanciaDeUsuario(usuario)) throw new Error("No es usuario.");
+    console.log("Agregando usuario...");
+
+    if (!esInstanciaDeUsuario(usuario))
+      throw new Error("No es usuario válido.");
 
     usuarios.push(usuario);
+
+    console.log(`Usuario ${usuario.nombre}, agregado correctamente.\n`);
   };
 
   this.eliminarUsuario = function (usuario) {
-    if (!esObjeto(usuario)) throw new Error("No es objeto.");
-    if (!esInstanciaDeUsuario(usuario)) throw new Error("No es usuario.");
+    console.log(`Eliminando usuario...`);
 
-    const indice = usuarios.findIndex((u) => 
-      u.id === usuario.id
-    );
+    if (!esInstanciaDeUsuario(usuario))
+      throw new Error("No es usuario válido.");
+
+    const indice = usuarios.findIndex((u) => u.id === usuario.id);
+
+    if (indice === -1) throw new Error("No se encontró el usuario.");
 
     usuarios.splice(indice, 1);
+
+    console.log(`Usuario ${usuario.nombre}, eliminado correctamente.\n`);
   };
 
   usuarios.push(this);
