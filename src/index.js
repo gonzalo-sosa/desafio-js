@@ -1,5 +1,6 @@
 import { usuarios } from "./modules/usuario.js";
 import { crearUsuario } from "./lib/factory.js";
+import { envioDeFormulario, limpiarFormulario } from "./modules/auth.js";
 import "./style.css";
 
 try {
@@ -8,8 +9,6 @@ try {
     email: "gonzalo@email.com",
     clave: "123",
   });
-
-  console.log("Los usuarios existentes son:", usuarios);
 
   const editor = crearUsuario("editor", {
     nombre: "agustin",
@@ -26,9 +25,15 @@ try {
   admin.agregarUsuario(editor);
   admin.agregarUsuario(regular);
 
-  admin.eliminarUsuario(editor);
-
+  //admin.eliminarUsuario(editor);
   console.log(usuarios);
 } catch (error) {
   console.log(error.message);
 }
+
+const $form = document.getElementById("iniciar-sesion");
+
+$form.addEventListener("submit", envioDeFormulario);
+
+// TODO: solucionar reset de datos
+$form.addEventListener("reset", limpiarFormulario);
