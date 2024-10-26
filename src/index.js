@@ -1,5 +1,6 @@
 import { usuarios } from "./modules/usuario.js";
 import { crearUsuario } from "./lib/factory.js";
+import "./style.css";
 
 try {
   const admin = crearUsuario("admin", {
@@ -12,7 +13,7 @@ try {
 
   const editor = crearUsuario("editor", {
     nombre: "agustin",
-    email: "agustinemail.com",
+    email: "agustin@email.com",
     clave: "123",
   });
 
@@ -25,14 +26,9 @@ try {
   admin.agregarUsuario(editor);
   admin.agregarUsuario(regular);
 
-  admin.eliminarUsuario(); // ERROR
+  admin.eliminarUsuario(editor);
 
   console.log(usuarios);
-
-  for (let usuario of usuarios) {
-    usuario.login();
-    usuario.logout();
-  }
 } catch (error) {
   console.log(error.message);
 }
