@@ -1,4 +1,5 @@
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const path = require("path");
 const webpack = require("webpack");
 
@@ -33,6 +34,10 @@ module.exports = {
           },
         },
       },
+      {
+        test: /\.css$/,
+        use: [MiniCssExtractPlugin.loader, "css-loader"],
+      },
     ],
   },
   resolve: {
@@ -40,12 +45,17 @@ module.exports = {
       vm: false,
       crypto: require.resolve("crypto-browserify"),
       stream: require.resolve("stream-browserify"),
+      process: require.resolve("process/browser"),
     },
   },
   plugins: [
     new HtmlWebpackPlugin({
       template: "./src/index.html",
       filename: "index.html",
+    }),
+    new MiniCssExtractPlugin({
+      filename: "[name].css",
+      chunkFilename: "[id].css",
     }),
     new webpack.ProvidePlugin({
       process: "process/browser",
