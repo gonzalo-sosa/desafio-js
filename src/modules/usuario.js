@@ -13,17 +13,19 @@ const _sesionIniciada = new WeakMap();
 export function Usuario(nombre, email, clave) {
   verificarEmail(email);
 
-  _id.set(this, obtenerUUID().then((uuid) => uuid));
+  _id.set(this, obtenerUUID());
   _nombre.set(this, nombre.trim());
   _email.set(this, email.trim());
   _sesionIniciada.set(this, false);
-  let _clave = cifrarClave(clave).then((claveCifrada) => claveCifrada);
+  let _clave = cifrarClave(clave);
 
-  Object.defineProperty(this, "id", {
-    get: function () {
-      return _id.get(this);
-    },
-  });
+  this.esIdCorrecto = function (id) {
+    return _id.get(this) === id;
+  };
+
+  this.esClaveCorrecta = async function (clave) {
+    return _clave === cifrarClave(clave);
+  };
 
   Object.defineProperty(this, "nombre", {
     get: function () {
@@ -41,7 +43,8 @@ export function Usuario(nombre, email, clave) {
 Usuario.prototype.login = function () {
   let sesionIniciada = _sesionIniciada.get(this);
 
-  if (sesionIniciada) throw new Error("La sesión ya está iniciada.");
+  if (sesionIniciada)
+    throw new Error(`La sesión de ${this.nombre} ya está iniciada.`);
 
   _sesionIniciada.set(this, !sesionIniciada);
 
@@ -51,7 +54,8 @@ Usuario.prototype.login = function () {
 Usuario.prototype.logout = function () {
   let sesionIniciada = _sesionIniciada.get(this);
 
-  if (!sesionIniciada) throw new Error("La sesión ya está cerrada.");
+  if (!sesionIniciada)
+    throw new Error(`La sesión de ${this.nombre} ya está cerrada.`);
 
   _sesionIniciada.set(this, !sesionIniciada);
 
