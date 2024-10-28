@@ -1,5 +1,6 @@
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const TerserPlugin = require("terser-webpack-plugin");
 const path = require("path");
 const webpack = require("webpack");
 
@@ -9,6 +10,19 @@ module.exports = {
     path: path.resolve(__dirname, "dist"),
     filename: "main.js",
     clean: true,
+  },
+  optimization: {
+    minimize: true,
+    minimizer: [
+      new TerserPlugin({
+        terserOptions: {
+          output: {
+            comments: false,
+          },
+        },
+        extractComments: false,
+      }),
+    ],
   },
   watchOptions: {
     ignored: /node_modules/,
@@ -51,7 +65,7 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: "./src/index.html",
-      filename: "index.html",
+      favicon: "./src/assets/favicon.ico",
     }),
     new MiniCssExtractPlugin({
       filename: "[name].css",
