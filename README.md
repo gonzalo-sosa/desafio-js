@@ -526,7 +526,7 @@ module.exports = {
 }
 ```
 
-DevServer para ejecutar código en el navegador dado un puerto específico: 
+DevServer para ejecutar código en el navegador dado un puerto específico:
 
 ```js
 module.exports = {
