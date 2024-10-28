@@ -42,6 +42,12 @@ export function Usuario(nombre, email, clave) {
       return _email.get(this);
     },
   });
+
+  Object.defineProperty(this, "sesionIniciada", {
+    get: function () {
+      return _sesionIniciada.get(this);
+    },
+  });
 }
 
 Usuario.prototype.login = function () {
