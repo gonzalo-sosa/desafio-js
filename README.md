@@ -169,7 +169,7 @@ class Contenido {
 }
 ```
 
-Pero al momento de cambiar una propiedad el programa deja de funcionar y se muestra un mensaje por consola "Maximum call stack size exceeded" que indica que programa se quedó sin memoria.
+Pero al momento de cambiar una propiedad el programa deja de funcionar y se muestra un mensaje por consola "Maximum call stack size exceeded" que indica que el programa se quedó sin memoria.
 Entonces, realizo un debug del archivo "index.js" en visual studio code con "node.js" pero comentando el import de archivo css y el manejo del DOM.
 
 ```js
@@ -183,7 +183,7 @@ $form.addEventListener("submit", envioDeFormulario);
 */
 ```
 
-Luego, coloco un breakpoint cuando se modifica el contenido, concretamente en la línea 39. Al revisar veo que la función setter entra correctamente, realiza la validación pero cuando se quiere asignar el valor se vuelve a llamar a la función. Esto debido a que la propiedad el setter llevan el mismo nombre, por lo que para solucionar este problema sólo hay que modificar el nombre de las propiedades.
+Luego, coloco un breakpoint cuando se modifica el contenido, concretamente en la línea 39. Al revisar veo que la función setter entra correctamente, realiza la validación pero cuando se quiere asignar el valor se vuelve a llamar a la función. Esto debido a que la propiedad y el setter llevan el mismo nombre, por lo que para solucionar este problema sólo hay que modificar el nombre de las propiedades.
 
 ```js
 class Contenido {
@@ -214,7 +214,6 @@ Interactividad con página index.html
 Una vez iniciada la sesión redireccionar al usuario a otra ruta o modificar la página actual.
 
 Evitar que se pueda cambiar de contraseña de un usuario sin realizar una verificación externa (por correo).
-
 
 ## Hoisting y Closures
 
