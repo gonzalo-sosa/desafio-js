@@ -27,6 +27,10 @@ try {
 
   cambiarClave("emanuel@email.com", "321");
 
+  admin.eliminarUsuario(editor);
+
+  editor.agregarUsuario();
+
   console.log(usuarios);
 } catch (error) {
   console.log(error.message);
