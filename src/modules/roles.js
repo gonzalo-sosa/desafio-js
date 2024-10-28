@@ -38,6 +38,12 @@ export function Editor(nombre, email, clave) {
   Usuario.call(this, nombre, email, clave);
 
   this.editarContenido = function (contenido, { titulo, texto }) {
+    if (!this.sesionIniciada)
+      throw new Error(
+        "La sesión no está iniciada. Inicie sesión para poder editar contenido."
+      );
+
+    console.log(`${this.nombre} está modificando contenido...`);
     if (!esInstanciaDeContenido(contenido))
       throw new Error("No es contenido válido.");
 
@@ -50,6 +56,11 @@ export function UsuarioRegular(nombre, email, clave) {
   Usuario.call(this, nombre, email, clave);
 
   this.verContenido = function (contenido) {
+    if (!this.sesionIniciada)
+      throw new Error(
+        "La sesión no está iniciada. Inicie sesión para poder ver contenido"
+      );
+
     if (!esInstanciaDeContenido(contenido))
       throw new Error("No es contenido válido.");
 
