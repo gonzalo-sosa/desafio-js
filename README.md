@@ -12,7 +12,7 @@ Variable con alcance global "usuarios", es un array vacío que permite que las c
 var usuarios = []
 ```
 
-Constructor Function "Usuario" que es afecta por Hoisting
+Constructor Function "Usuario" que es afectada por Hoisting
 
 ```js
 function Usuario(nombre, email, clave) {
@@ -26,12 +26,6 @@ function Usuario(nombre, email, clave) {
 
 La clase base "usuario" contiene propiedades privadas y método públicos que se detallarán a continuación:
 
-```js
-function Usuario(nombre, email, clave) {
-  // Ver usuario.js
-}
-```
-
 Propiedades privadas de "usuario", se utiliza "WeakMap" para evitar el simple acceso ya se necesitan de crear getters y setters para interactuar con estas:
 
 ```js
@@ -40,7 +34,7 @@ const _nombre = new WeakMap();
 const _email = new WeakMap();
 const _sesionIniciada = new WeakMap();
 
-function Usuario(){
+function Usuario(nombre, email, clave){
   _id.set(this, obtenerUUID());
   _nombre.set(this, nombre.trim());
   _email.set(this, email.trim());
@@ -51,7 +45,7 @@ function Usuario(){
 Getters de propiedades específicas:
 
 ```js
-function Usuario(){
+function Usuario(nombre, email, clave){
   // Ver usuario.js
   Object.defineProperty(this, "nombre", {
     get: function () {
@@ -79,6 +73,21 @@ Propiedad "_clave" que únicamente existe en el contexto del usuario actual y es
 function Usuario(nombre, email, clave)
 {
   let _clave = cifrarClave(clave);
+}
+```
+
+Métodos públicos para verificación de datos:
+
+```js
+function Usuario(nombre, email, clave){
+  // Ver usuario.js
+  this.esIdCorrecto = function (id) {
+    return _id.get(this) === id;
+  };
+
+  this.esClaveCorrecta = function (clave) {
+    return _clave === cifrarClave(clave);
+  };
 }
 ```
 
