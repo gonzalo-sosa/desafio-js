@@ -34,13 +34,10 @@ README.md
 .gitignore
 ```
 
-La carpeta "src" contiene los archivos que van a ser utilizados por la aplicación web.
-
-La carpeta "utils" contiene archivos que son útiles pero que no refieren estrictamente a funciones del sistema.
-
-La carpeta "lib" contiene las funciones que se utilizan reiteradamente en las clases de "modules".
-
-La carpeta "modules" contiene la declaración de las clases del proyecto: usuario, administrador, editor y usuario regular. Además, el sistema de autenticación que interactúa con las clases.
+- "src" contiene los archivos que van a ser utilizados por la aplicación web.
+- utils" contiene archivos que son útiles pero que no refieren estrictamente a funciones del sistema.
+- "lib" contiene las funciones que se utilizan reiteradamente en las clases de "modules".
+- "modules" contiene la declaración de las clases del proyecto: usuario, administrador, editor y usuario regular. Además, el sistema de autenticación que interactúa con las clases.
 
 ## Configuración e instalación
 
