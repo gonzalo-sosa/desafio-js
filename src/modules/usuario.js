@@ -23,8 +23,12 @@ export function Usuario(nombre, email, clave) {
     return _id.get(this) === id;
   };
 
-  this.esClaveCorrecta = async function (clave) {
+  this.esClaveCorrecta = function (clave) {
     return _clave === cifrarClave(clave);
+  };
+
+  this.cambiarClave = function (nuevaClave) {
+    _clave = cifrarClave(nuevaClave);
   };
 
   Object.defineProperty(this, "nombre", {
