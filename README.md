@@ -26,7 +26,7 @@ function Usuario(nombre, email, clave) {
 
 La clase base "usuario" contiene propiedades privadas y método públicos que se detallarán a continuación:
 
-Propiedades privadas de "usuario", se utiliza "WeakMap" para evitar el simple acceso ya se necesitan de crear getters y setters para interactuar con estas:
+Propiedades privadas de "usuario", se utiliza "WeakMap" para evitar el simple acceso ya que se necesitan crear getters y setters para interactuar con estas mismas:
 
 ```js
 const _id = new WeakMap();
@@ -47,18 +47,22 @@ Getters de propiedades específicas:
 ```js
 function Usuario(nombre, email, clave){
   // Ver usuario.js
+  
+  // Get de nombre
   Object.defineProperty(this, "nombre", {
     get: function () {
       return _nombre.get(this);
     },
   });
 
+  // Get de email
   Object.defineProperty(this, "email", {
     get: function () {
       return _email.get(this);
     },
   });
 
+  // Get de sesionIniciada
   Object.defineProperty(this, "sesionIniciada", {
     get: function () {
       return _sesionIniciada.get(this);
@@ -169,3 +173,42 @@ function Editor(nombre, email, clave){
   };
 }
 ```
+
+El UsuarioRegular sólo puede ver contenido:
+
+```js
+function UsuarioRegular(nombre, email, clave){
+   this.verContenido = function (contenido) {
+    // Ver en roles.js
+  };
+}
+```
+
+## Características modernas de javascript
+
+Arrow Functions
+
+```js
+const iniciarSesion = ({ email, clave }) => {
+  // Arrow Function que recibe un usuario en cada iteración y realiza la comparación de email
+  const usuario = usuarios.find((u) => u.email === email);
+  
+  // Ver validaciones en auth.js
+
+  usuario.login();
+};
+```
+
+Template Literals
+
+```js
+Usuario.prototype.login = function () {
+  // Ver implementación en usuario.js
+
+  // Se accede al nombre mediante el getter
+  console.log(`Bienvenido, ${this.nombre}.`);
+};
+```
+
+Destructuring
+
