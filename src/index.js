@@ -1,9 +1,19 @@
 import { usuarios } from "./modules/usuario.js";
 import { crearUsuario } from "./lib/factory.js";
 import { cambiarClave, envioDeFormulario } from "./modules/auth.js";
+import { Contenido } from "./modules/contenido.js";
 import "./style.css";
 
+const $form = document.getElementById("iniciar-sesion");
+
+$form.addEventListener("submit", envioDeFormulario);
+
 try {
+  const contenido = new Contenido(
+    "Título de contenido",
+    "Texto del contenido."
+  );
+
   const admin = crearUsuario("admin", {
     nombre: "gonzalo",
     email: "gonzalo@email.com",
@@ -27,15 +37,14 @@ try {
 
   cambiarClave("emanuel@email.com", "321");
 
-  admin.eliminarUsuario(editor);
+  editor.editarContenido(contenido, {
+    titulo: "Contenido modificado por editor",
+    texto: "Texto de contenido",
+  });
 
-  editor.agregarUsuario();
+  regular.verContenido(contenido);
 
   console.log(usuarios);
 } catch (error) {
   console.log(error.message);
 }
-
-const $form = document.getElementById("iniciar-sesion");
-
-$form.addEventListener("submit", envioDeFormulario);
