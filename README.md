@@ -2,6 +2,80 @@
 
 [Ver consignas](./consignas.md)
 
+## Introducción
+
+Este proyecto tiene la finalidad de crear un sistema de autenticación que interactué con usuarios para iniciar sus sesiones o cerrarlas. Este sistema respeta los fundamentos OOP por lo que en sus módulos se ven las declaraciones de clases con propiedades y métodos.
+
+## Estructura del proyecto 
+
+```bash
+/src
+  /assets
+    favicon.ico
+  /lib
+    extend.js
+    factory.js
+    generator.js
+  /modules
+    auth.js
+    contenido.js
+    roles.js
+    usuario.js
+  /utils
+    validator.js
+  index.html
+  index.js
+  style.css
+/dist
+  main.bundle.js
+package.json
+webpack.config.cjs
+README.md
+.gitignore
+```
+
+La carpeta "src" contiene los archivos que van a ser utilizados por la aplicación web.
+
+La carpeta "utils" contiene archivos que son útiles pero que no refieren estrictamente a funciones del sistema.
+
+La carpeta "lib" contiene las funciones que se utilizan reiteradamente en las clases de "modules".
+
+La carpeta "modules" contiene la declaración de las clases del proyecto: usuario, administrador, editor y usuario regular. Además, el sistema de autenticación que interactúa con las clases.
+
+## Configuración e instalación
+
+Este proyecto utiliza pnpm para el manejo de paquetes o node modules.
+
+```bash
+pnpm install
+```
+
+Además, existen unos comandos para ejecutar el proyecto de diferentes maneras:
+
+- dev:serve para preparar un puerto en el que se ejecutará el navegador web
+
+```bash
+pnpm run dev:serve
+```
+
+- dev:watch para ejecutar en modo development un build con observación que ejecuta el build cada vez que se realiza un cambio en el código
+
+```bash
+pnpm run dev:watch
+```
+
+- dev:build para realizar un build del proyecto pero en modo development
+
+```bash
+pnpm run dev:build
+```
+
+- build para realizar un build del proyecto en modo production
+
+```bash
+pnpm run build
+```
+
 ## Hoisting y Closures
 
 Para demostrar el hoisting se utilizan las Constructor Function que son elevadas al inicio del archivo para ser creadas antes de que las utilicen, las closures en el uso de la variable con alcance global "usuarios" y la herencia prototipal en los métodos "login" y "logout" de "Usuario".
@@ -310,5 +384,20 @@ module.exports = {
       resource.request = resource.request.replace(/^node:/, "");
     }),
   ]
+}
+```
+
+DevServer para ejecutar código en el navegador dado un puerto específico: 
+
+```js
+module.exports = {
+  devServer: {
+    static: {
+      directory: path.join(__dirname, "dist"),
+    },
+    compress: true,
+    port: 3000,
+    open: true,
+  }
 }
 ```
