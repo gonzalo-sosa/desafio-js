@@ -1,6 +1,6 @@
 import { usuarios } from "./modules/usuario.js";
 import { crearUsuario } from "./lib/factory.js";
-import { envioDeFormulario, limpiarFormulario } from "./modules/auth.js";
+import { cambiarClave, envioDeFormulario } from "./modules/auth.js";
 import "./style.css";
 
 try {
@@ -25,7 +25,8 @@ try {
   admin.agregarUsuario(editor);
   admin.agregarUsuario(regular);
 
-  //admin.eliminarUsuario(editor);
+  cambiarClave("emanuel@email.com", "321");
+
   console.log(usuarios);
 } catch (error) {
   console.log(error.message);
@@ -34,6 +35,3 @@ try {
 const $form = document.getElementById("iniciar-sesion");
 
 $form.addEventListener("submit", envioDeFormulario);
-
-// TODO: solucionar reset de datos
-$form.addEventListener("reset", limpiarFormulario);
