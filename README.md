@@ -73,6 +73,27 @@ pnpm run dev:build
 pnpm run build
 ```
 
+## Desafíos enfrentados
+
+Utilizar crypto en browser ya que pertenece a node.
+
+Configuración webpack para index.html
+
+El archivo entry de javascript se agrega automáticamente.
+
+El archivo de css hay que importarlo en el entry de javascript.
+
+Recursividad en setter de contenido.
+
+## Mejoras a futuro
+
+Interactividad con página index.html
+
+Una vez iniciada la sesión redireccionar al usuario a otra ruta o modificar la página actual.
+
+Evitar que se pueda cambiar de contraseña de un usuario sin realizar una verificación externa (por correo).
+
+
 ## Hoisting y Closures
 
 Para demostrar el hoisting se utilizan las Constructor Function que son elevadas al inicio del archivo para ser creadas antes de que las utilicen, las closures en el uso de la variable con alcance global "usuarios" y la herencia prototipal en los métodos "login" y "logout" de "Usuario".
