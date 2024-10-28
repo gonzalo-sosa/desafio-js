@@ -1,4 +1,5 @@
 import { usuarios } from "../modules/usuario.js";
+import { verificarEmail } from "../utils/validator.js";
 
 export const iniciarSesion = ({ email, clave }) => {
   const usuario = usuarios.find((u) => u.email === email);
@@ -22,6 +23,16 @@ export const cerrarSesion = ({ id }) => {
   usuario.logout();
 };
 
+export function cambiarClave(email, nuevaClave) {
+  verificarEmail(email);
+
+  const usuario = usuarios.find((u) => u.email === email);
+
+  if (!usuario) throw new Error(`Usuario con email ${email} inexistente.`);
+
+  usuario.cambiarClave(nuevaClave);
+}
+
 export function envioDeFormulario(evento) {
   console.log("Enviando formulario...");
   evento.preventDefault();
@@ -31,11 +42,4 @@ export function envioDeFormulario(evento) {
   const clave = datos.get("clave");
 
   iniciarSesion({ email, clave });
-}
-
-export function limpiarFormulario(evento) {
-  console.log("Limpiando formulario...");
-  evento.preventDefault();
-  const $form = evento.target;
-  $form.reset();
 }
