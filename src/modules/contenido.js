@@ -9,9 +9,11 @@ export class Contenido {
   }
 
   set titulo(nuevoTitulo) {
+    console.log("Modificando título...");
     if (!esString(nuevoTitulo)) throw new Error("Título no válido.");
 
     this._titulo = nuevoTitulo;
+    console.log("Título modificado correctamente.");
   }
 
   get titulo() {
@@ -19,9 +21,11 @@ export class Contenido {
   }
 
   set texto(nuevoTexto) {
+    console.log("Modificando texto...");
     if (!esString(nuevoTexto)) throw new Error("Texto no válido.");
 
     this._texto = nuevoTexto;
+    console.log("Texto modificado correctamente.");
   }
 
   get texto() {
