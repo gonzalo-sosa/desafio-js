@@ -1,5 +1,3 @@
-// TODO: verificación de email
-// TODO: hash de clave
 import { obtenerUUID, cifrarClave } from "../lib/generator.js";
 import { verificarEmail } from "../utils/validator.js";
 
