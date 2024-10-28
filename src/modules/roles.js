@@ -1,6 +1,5 @@
 import { usuarios, Usuario, esInstanciaDeUsuario } from "./usuario.js";
 import { extend } from "../lib/extend.js";
-import { esObjeto } from "../utils/validator.js";
 import { esInstanciaDeContenido } from "./contenido.js";
 
 export function Administrador(nombre, email, clave) {
@@ -39,8 +38,8 @@ export function Editor(nombre, email, clave) {
   Usuario.call(this, nombre, email, clave);
 
   this.editarContenido = function (contenido, { titulo, texto }) {
-    if (typeof contenido !== "object") throw new Error("No es objeto.");
-    if (!esInstanciaDeContenido(contenido)) throw new Error("No es contenido.");
+    if (!esInstanciaDeContenido(contenido))
+      throw new Error("No es contenido válido.");
 
     contenido.titulo = titulo;
     contenido.texto = texto;
@@ -51,8 +50,8 @@ export function UsuarioRegular(nombre, email, clave) {
   Usuario.call(this, nombre, email, clave);
 
   this.verContenido = function (contenido) {
-    if (!esObjeto(contenido)) throw new Error("No es objeto.");
-    if (!esInstanciaDeContenido(contenido)) throw new Error("No es contenido.");
+    if (!esInstanciaDeContenido(contenido))
+      throw new Error("No es contenido válido.");
 
     console.log(`${this.nombre} viendo "${contenido.titulo}"`);
   };
