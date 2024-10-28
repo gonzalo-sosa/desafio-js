@@ -75,7 +75,48 @@ pnpm run build
 
 ## Desafíos enfrentados
 
-Utilizar crypto en browser ya que pertenece a node.
+### Utilizar crypto en browser
+
+Crypto es un módulo de node por que lo no puede ser accedido en el browser, para poder utilizarlo hay que agregar plugins a webpack para que genere el código faltante.
+
+Primero se instalan los módulos a utilizar:
+
+```bash
+pnpm install crypto-browserify process stream-browserify
+```
+
+Luego se modifica el archivo de webpack:
+
+```js
+//webpack.config.cjs
+const webpack = require("webpack");
+```
+
+```js
+module.exports = {
+ resolve: {
+    fallback: {
+      vm: false, // se evita un fallback para vm
+      crypto: require.resolve("crypto-browserify"),
+      stream: require.resolve("stream-browserify"),
+      process: require.resolve("process/browser"),
+    },
+  }
+}
+```
+
+```js
+module.exports = {
+  plugins: [
+      new webpack.ProvidePlugin({
+        process: "process/browser",
+      }),
+      new webpack.NormalModuleReplacementPlugin(/node:crypto/, (resource) => {
+        resource.request = resource.request.replace(/^node:/, "");
+      })
+  ]
+}
+```
 
 Configuración webpack para index.html
 
@@ -83,7 +124,69 @@ El archivo entry de javascript se agrega automáticamente.
 
 El archivo de css hay que importarlo en el entry de javascript.
 
-Recursividad en setter de contenido.
+### Recursividad en setter de contenido
+
+En la clase contenido se declaran propiedades _id, título y texto. Para modificar el título y el texto se crean setters para validar el valor antes de asignarlo al objeto.
+
+```js
+class Contenido {
+  constructor(titulo, texto) {
+    let _id = obtenerUUID();
+    this.titulo = titulo;
+    this.texto = texto;
+  }
+
+  set titulo(nuevoTitulo) {
+     if (!esString(nuevoTitulo)) throw new Error("Título no válido.");
+    
+    this.titulo = nuevoTitulo;
+  }
+
+  set texto(nuevoTexto) {
+     if (!esString(nuevoTexto)) throw new Error("Texto no válido.");
+    
+    this.texto = nuevoTexto;
+  }
+}
+```
+
+Pero al momento de cambiar una propiedad el programa deja de funcionar y se muestra un mensaje por consola "Maximum call stack size exceeded" que indica que programa se quedó sin memoria.
+Entonces, realizo un debug del archivo "index.js" en visual studio code con "node.js" pero comentando el import de archivo css y el manejo del DOM.
+
+```js
+//import "./style.css";
+```
+
+```js
+/*
+const $form = document.getElementById("iniciar-sesion");
+$form.addEventListener("submit", envioDeFormulario);
+*/
+```
+
+Luego, coloco un breakpoint cuando se modifica el contenido, concretamente en la línea 39. Al revisar veo que la función setter entra correctamente, realiza la validación pero cuando se quiere asignar el valor se vuelve a llamar a la función. Esto debido a que la propiedad el setter llevan el mismo nombre, por lo que para solucionar este problema sólo hay que modificar el nombre de las propiedades.
+
+```js
+class Contenido {
+  constructor(titulo, texto) {
+    let _id = obtenerUUID();
+    this._titulo = titulo;
+    this._texto = texto;
+  }
+
+  set titulo(nuevoTitulo) {
+     if (!esString(nuevoTitulo)) throw new Error("Título no válido.");
+    
+    this._titulo = nuevoTitulo;
+  }
+
+  set texto(nuevoTexto) {
+     if (!esString(nuevoTexto)) throw new Error("Texto no válido.");
+    
+    this._texto = nuevoTexto;
+  }
+}
+```
 
 ## Mejoras a futuro
 
