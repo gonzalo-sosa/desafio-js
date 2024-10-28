@@ -186,11 +186,11 @@ function UsuarioRegular(nombre, email, clave){
 
 ## Características modernas de javascript
 
-Arrow Functions
+Arrow Functions, en la función "iniciarSesion" se crea una función flecha que se ejecuta en cada iteración de usuarios.
 
 ```js
 const iniciarSesion = ({ email, clave }) => {
-  // Arrow Function que recibe un usuario en cada iteración y realiza la comparación de email
+  // Find recibe una Arrow Function que, a su vez, recibe un usuario en cada iteración y realiza la comparación de email
   const usuario = usuarios.find((u) => u.email === email);
   
   // Ver validaciones en auth.js
@@ -199,7 +199,7 @@ const iniciarSesion = ({ email, clave }) => {
 };
 ```
 
-Template Literals
+Template Literals, con el uso de los backticks se escribe un mensaje por consola dando una bienvenida al usuaria que ha iniciado sesión.
 
 ```js
 Usuario.prototype.login = function () {
@@ -210,5 +210,11 @@ Usuario.prototype.login = function () {
 };
 ```
 
-Destructuring
+Destructuring, al el segundo parámetro que es un objeto, se desestructuran sus propiedades mediante el uso de las llaves y enunciar sus propiedades.
 
+```js
+const crearUsuario = (tipo, { nombre, email, clave }) => {
+  // Ver en factory.js
+}
+```
+  
