@@ -3,6 +3,7 @@ import { verificarEmail } from "../utils/validator.js";
 
 export const iniciarSesion = ({ email, clave }) => {
   const usuario = usuarios.find((u) => u.email === email);
+
   if (!usuario) {
     throw new Error("El usuario no existe.");
   }
