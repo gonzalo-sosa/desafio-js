@@ -1,7 +1,6 @@
 import { usuarios } from "./modules/usuario.js";
-import { crearUsuario } from "./lib/factory.js";
+import { crearContenido, crearUsuario } from "./lib/factory.js";
 import { cambiarClave, envioDeFormulario } from "./modules/auth.js";
-import { Contenido } from "./modules/contenido.js";
 import "./style.css";
 
 const $form = document.getElementById("iniciar-sesion");
@@ -9,10 +8,10 @@ const $form = document.getElementById("iniciar-sesion");
 $form.addEventListener("submit", envioDeFormulario);
 
 try {
-  const contenido = new Contenido(
-    "Título de contenido",
-    "Texto del contenido."
-  );
+  const contenido = crearContenido({
+    titulo: "Título de contenido",
+    texto: "Texto del contenido.",
+  });
 
   const admin = crearUsuario("admin", {
     nombre: "gonzalo",
