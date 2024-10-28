@@ -6,7 +6,7 @@
 
 Este proyecto tiene la finalidad de crear un sistema de autenticación que interactué con usuarios para iniciar sus sesiones o cerrarlas. Este sistema respeta los fundamentos OOP por lo que en sus módulos se ven las declaraciones de clases con propiedades y métodos.
 
-## Estructura del proyecto 
+## Estructura del proyecto
 
 ```bash
 /src
