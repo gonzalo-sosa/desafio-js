@@ -10,6 +10,11 @@ const _nombre = new WeakMap();
 const _email = new WeakMap();
 const _sesionIniciada = new WeakMap();
 
+/** 
+  @param {string} nombre
+  @param {string} email
+  @param {string} clave 
+*/
 export function Usuario(nombre, email, clave) {
   verificarEmail(email);
 
