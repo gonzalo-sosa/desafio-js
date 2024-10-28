@@ -216,14 +216,18 @@ const crearUsuario = (tipo, { nombre, email, clave }) => {
 }
 ```
 
-Estructura del proyecto
-
-```bash
-```
-
 ## Módulos y Webpack
 
 ### Módulos
+
+Estructura de módulos
+
+```bash
+/modules
+  usuario.js
+  roles.js
+  auth.js
+```
 
 - [Clase usuario](./src/modules/usuario.js)
 
