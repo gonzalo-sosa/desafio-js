@@ -1,6 +1,6 @@
 # Desafío JavaScript
 
-[Ver consignas]("consignas.md")
+[Ver consignas](./consignas.md)
 
 ## Hoisting y Closures
 
