@@ -22,8 +22,6 @@ function Usuario(nombre, email, clave) {
 
 ## Herencia Prototipal y OOP
 
-### Clase Base Usuario
-
 La clase base "usuario" contiene propiedades privadas y método públicos que se detallarán a continuación:
 
 Propiedades privadas de "usuario", se utiliza "WeakMap" para evitar el simple acceso ya que se necesitan crear getters y setters para interactuar con estas mismas:
@@ -217,4 +215,96 @@ const crearUsuario = (tipo, { nombre, email, clave }) => {
   // Ver en factory.js
 }
 ```
-  
+
+Estructura del proyecto
+
+```bash
+```
+
+## Módulos y Webpack
+
+### Módulos
+
+- [Clase usuario](./src/modules/usuario.js)
+
+- [Roles y permisos](./src/modules/roles.js)
+
+- [Autenticación y gestión de sesiones](./src/modules/auth.js)
+
+### Webpack
+
+[Archivo de configuración webpack](./webpack.config.cjs)
+
+- [Entrada](./src/index.js)
+
+```js
+module.exports = {
+  entry: "./src/index.js"
+}
+```
+
+- Salida en "dist/main.bundle.js" (no visible ya que se ignore en .gitignore)
+
+```js
+module.exports = {
+  output: {
+    path: path.resolve(__dirname, "dist"),
+    filename: "[name].bundle.js",
+    clean: true,
+  }
+} 
+
+```
+
+- Loaders y Plugins:
+
+Loaders
+
+```js
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        use: {
+          loader: "babel-loader", // loader de babel
+          options: {
+            presets: ["@babel/preset-env"],
+          },
+        },
+      },
+      {
+        test: /\.css$/,
+        use: [MiniCssExtractPlugin.loader, "css-loader"], // css loader
+      },
+    ],
+  }
+}
+```
+
+Plugins
+
+```js
+module.exports = {
+  plugins: [
+    // Plugin para HTML
+    new HtmlWebpackPlugin({
+      template: "./src/index.html",
+      favicon: "./src/assets/favicon.ico",
+    }),
+    // Plugin para CSS
+    new MiniCssExtractPlugin({
+      filename: "[name].css",
+      chunkFilename: "[id].css",
+    }),
+    new webpack.ProvidePlugin({
+      process: "process/browser",
+    }),
+    // para poder utilizar crypto en browser
+    new webpack.NormalModuleReplacementPlugin(/node:crypto/, (resource) => {
+      resource.request = resource.request.replace(/^node:/, "");
+    }),
+  ]
+}
+```
