@@ -118,11 +118,30 @@ module.exports = {
 }
 ```
 
-Configuración webpack para index.html
+### Configuración webpack para index.html
 
-El archivo entry de javascript se agrega automáticamente.
+El archivo entry de javascript se agrega automáticamente en el template de index.html
 
-El archivo de css hay que importarlo en el entry de javascript.
+```js
+// webpack.config.cjs
+module.exports = {
+ plugins: [
+    new HtmlWebpackPlugin({
+      template: "./src/index.html", // archivo que se utilizará para agregar el js
+      favicon: "./src/assets/favicon.ico", // para agregar favicon
+    })
+ ]
+}
+```
+
+### Plugin CSS
+
+El archivo de css hay que importarlo en el entry de javascript sino no se realizará el bundle sobre él.
+
+```js
+// index.js
+import './style.css'
+```
 
 ### Recursividad en setter de contenido
 
