@@ -5,6 +5,7 @@ import {
   ROLES,
 } from "../modules/roles.js";
 import { esString } from "../utils/validator.js";
+import { Contenido } from "../modules/contenido.js";
 
 /**
  * Crea un usuario de tipo Administrador, Editor o UsuarioRegular.

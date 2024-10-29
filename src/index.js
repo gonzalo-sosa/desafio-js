@@ -34,6 +34,8 @@ try {
   admin.agregarUsuario(editor);
   admin.agregarUsuario(regular);
 
+  admin.eliminarUsuario(editor);
+
   cambiarClave("emanuel@email.com", "321");
 
   editor.editarContenido(contenido, {
